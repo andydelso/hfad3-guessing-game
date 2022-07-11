@@ -28,26 +28,32 @@ class GameFragment : Fragment() {
         // This includes private backing properties with public accessors for read-only privacy
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
+        // setup data binding with live data
+        binding.gameViewModel = viewModel // layout's views can now use this to access the viewModel's properties and methods
+        binding.lifecycleOwner = viewLifecycleOwner // layout's views can now observe the viewModel's live data and respond to the changes
+
 //        updateScreen() // no longer needed as we are using live data
 
-        // 2. Fragment observes changes to dynamic properties of view model
-        viewModel.incorrectGuesses.observe(viewLifecycleOwner) { newIncorrectGuesses ->
-            // 3. Fragment updates its views with values of the observed properties
-            binding.incorrectGuesses.text = "Incorrect guesses: $newIncorrectGuesses"
-        }
+        // No longer needed as the data binding is taking care of this and the string formatting
+//        // 2. Fragment observes changes to dynamic properties of view model
+//        viewModel.incorrectGuesses.observe(viewLifecycleOwner) { newIncorrectGuesses ->
+//            // 3. Fragment updates its views with values of the observed properties
+//            binding.incorrectGuesses.text = "Incorrect guesses: $newIncorrectGuesses"
+//        }
+//
+//        // 2.
+//        viewModel.livesLeft.observe(viewLifecycleOwner) { newLives ->
+//            // 3.
+//            binding.lives.text = "You have $newLives left"
+//        }
+//
+//        // 2.
+//        viewModel.secretWordDisplay.observe(viewLifecycleOwner) { newSecretWordDisplay ->
+//            // 3.
+//            binding.word.text = newSecretWordDisplay
+//        }
 
-        // 2.
-        viewModel.livesLeft.observe(viewLifecycleOwner) { newLives ->
-            // 3.
-            binding.lives.text = "You have $newLives left"
-        }
-
-        // 2.
-        viewModel.secretWordDisplay.observe(viewLifecycleOwner) { newSecretWordDisplay ->
-            // 3.
-            binding.word.text = newSecretWordDisplay
-        }
-
+        // we need to retain this because there is actual logic here for navigation
         viewModel.gameOver.observe(viewLifecycleOwner) { isGameOver ->
             if (isGameOver) {
                 // 6. navigate to results when win or lose condition is met

@@ -75,4 +75,9 @@ class GameViewModel : ViewModel() {
         message += " The secret word was $secretWord"
         return message
     }
+
+    fun finishGame() {
+        // cause the fragment to navigate to result fragment
+        _gameOver.value = true
+    }
 }

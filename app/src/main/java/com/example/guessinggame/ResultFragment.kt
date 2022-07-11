@@ -19,7 +19,7 @@ class ResultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment from the view binding
         _binding = FragmentResultBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -29,7 +29,9 @@ class ResultFragment : Fragment() {
         viewModelFactory = ResultViewModelFactory(result)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ResultViewModel::class.java)
 
-        binding.wonLost.text = viewModel.result
+        // setup data binding
+
+        binding.resultViewModel = viewModel
 
         binding.newGameButton.setOnClickListener {
             val action = ResultFragmentDirections.actionResultFragmentToGameFragment()
