@@ -8,4 +8,5 @@
     <string name="incorrect_guesses">Incorrect guesses: %s</string>
     <string name="finish_game">Finish Game</string>
     <string name="start_new_game">Start new game!</string>
+    <string name="compose_ui_above">^^^ View based UI Above ^^^</string>
 </resources>

@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
+
         <TextView
             android:id="@+id/word"
             android:layout_width="wrap_content"
@@ -20,14 +21,16 @@
             android:layout_gravity="center"
             android:textSize="36sp"
             android:letterSpacing="0.1"
-            android:text="@{gameViewModel.secretWordDisplay}"/>
+            android:text="@{gameViewModel.secretWordDisplay}"
+            tools:text="________"/>
 
         <TextView
             android:id="@+id/lives"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="@{@string/lives_left(gameViewModel.livesLeft)}"/>
+            android:text="@{@string/lives_left(gameViewModel.livesLeft)}"
+            tools:text="You have 8 lives left \nIncorrect guesses:"/>
 
         <TextView
             android:id="@+id/incorrect_guesses"
@@ -43,7 +46,8 @@
             android:textSize="16sp"
             android:hint="@string/guess_a_letter"
             android:inputType="text"
-            android:maxLength="1" />
+            android:maxLength="1"
+            android:autofillHints=""/>
 
         <Button
             android:id="@+id/guess_button"
@@ -59,5 +63,18 @@
             android:layout_gravity="center"
             android:text="@string/finish_game"
             android:onClick="@{() -> gameViewModel.finishGame()}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/compose_ui_above"
+            android:textSize="28sp"
+            android:layout_gravity="center" />
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 </layout>
